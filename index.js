@@ -28,11 +28,20 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+      
+      The code for counter1 makes use of a closure while counter2 does not. 
+
   2. Which of the two uses a closure? How can you tell?
   
+      Counter1 uses a closure. You can tell because there is a function named 'counter' inside of the function called 'counterMaker.' 
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+     Counter1 would be preferable when trying to limit the number of globally scoped variables in your code. By defining "count = 0" inside of the counterMaker function 
+     you limit the possibility for naming confusion and errors later in the program. If you were just writing a simple program and scope issues aren't a problem, then 
+     declaring the variable 'count' outside of the function as is the case in counter2's code would be fine. 
+
 */
 
 // counter1 code
@@ -62,10 +71,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  return Math.floor(Math.random() * 3);
 }
-
+console.log('task 2', inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -81,9 +90,21 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
-}
+function finalScore(inningCB, innings){
+  let homeScore = 0;
+  let awayScore = 0;
+  for (let i = 0; i < innings; i++) {
+    homeScore = homeScore + inningCB();
+    awayScore = awayScore + inningCB();
+    }
+
+  return{
+    Home: homeScore,
+    Away: awayScore
+  }
+};
+
+console.log(finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
